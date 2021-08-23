@@ -23,6 +23,8 @@ class Navigation extends StatefulWidget {
 class _NavigationState extends State<Navigation> {
   int _selectedIndex = 0;
 
+  List<Widget> _widgetOptions = [Calendar(), News()];
+
   void _onItemTap(int index) {
     setState(() {
       _selectedIndex = index;
@@ -33,9 +35,7 @@ class _NavigationState extends State<Navigation> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(title: Text('ze')),
-      body: Center(
-        child: Text('bottom'),
-      ),
+      body: IndexedStack(index: _selectedIndex, children: _widgetOptions),
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
@@ -45,6 +45,30 @@ class _NavigationState extends State<Navigation> {
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTap,
+      ),
+    );
+  }
+}
+
+class Calendar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Container(
+      child: Center(
+        child: Text('Calendar'),
+      ),
+    );
+  }
+}
+
+class News extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Container(
+      child: Center(
+        child: Text('News'),
       ),
     );
   }
