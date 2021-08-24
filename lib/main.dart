@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:adaptive_theme/adaptive_theme.dart';
 
 void main() {
   runApp(MyApp());
@@ -8,9 +9,24 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo2',
-      home: Navigation(),
+    return AdaptiveTheme(
+      light: ThemeData(
+        brightness: Brightness.light,
+        primarySwatch: Colors.blue,
+        accentColor: Colors.amber,
+      ),
+      dark: ThemeData(
+        brightness: Brightness.dark,
+        primarySwatch: Colors.blue,
+        accentColor: Colors.amber,
+      ),
+      initial: AdaptiveThemeMode.system,
+      builder: (theme, darkTheme) => MaterialApp(
+        title: 'Adaptive Theme Demo',
+        theme: theme,
+        darkTheme: darkTheme,
+        home: Navigation(),
+      ),
     );
   }
 }
@@ -56,7 +72,12 @@ class Calendar extends StatelessWidget {
     // TODO: implement build
     return Container(
       child: Center(
-        child: Text('Calendar'),
+        child: ElevatedButton(
+          onPressed: () {
+            AdaptiveTheme.of(context).toggleThemeMode();
+          },
+          child: Text('Changer le thème'),
+        ),
       ),
     );
   }
