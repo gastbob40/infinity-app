@@ -4,7 +4,7 @@ class News extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Container(
+    return SafeArea(
       child: Center(
         child: Text('News'),
       ),

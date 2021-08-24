@@ -7,6 +7,8 @@ void main() {
   runApp(MyApp());
 }
 
+const Color darkBackground = Color(0xFF2D2D2D);
+
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -16,11 +18,13 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         primarySwatch: Colors.blue,
         accentColor: Colors.amber,
+        backgroundColor: Colors.white
       ),
       dark: ThemeData(
         brightness: Brightness.dark,
         primarySwatch: Colors.blue,
         accentColor: Colors.amber,
+        backgroundColor: darkBackground
       ),
       initial: AdaptiveThemeMode.system,
       builder: (theme, darkTheme) => MaterialApp(
@@ -52,7 +56,7 @@ class _NavigationState extends State<Navigation> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: AppBar(title: Text('ze')),
+      backgroundColor: Theme.of(context).backgroundColor,
       body: IndexedStack(index: _selectedIndex, children: _widgetOptions),
       bottomNavigationBar: BottomNavigationBar(
         items: [
