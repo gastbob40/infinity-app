@@ -7,6 +7,7 @@ class News extends StatelessWidget {
     return SafeArea(
       child: Column(
         children: [
+          SizedBox(height: 50,),
           Flexible(
             child: PageView(
               children: <Widget>[
