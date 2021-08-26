@@ -40,7 +40,9 @@ class WeekPicker extends StatelessWidget {
               else if (index == 0) calendarNotifier.prevWeek();
 
               if (index != 1) {
-                pageController.jumpToPage(1);
+                pageController.animateToPage(1,
+                    duration: Duration(milliseconds: 100),
+                    curve: Curves.easeIn);
               }
             },
             itemCount: 3,

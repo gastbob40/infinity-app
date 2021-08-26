@@ -55,11 +55,14 @@ class _NavigationState extends State<Navigation> {
   int _selectedIndex = 0;
 
   List<Widget> _widgetOptions = [
-    ChangeNotifierProvider.value(
-      value: CalendarNotifier(),
+    ChangeNotifierProvider(
+      create: (_) {
+        CalendarNotifier notifier = CalendarNotifier();
+        notifier.fetch();
+        return notifier;
+      },
       child: Calendar(),
-    )
-    , News()
+    )    , News()
   ];
 
   void _onItemTap(int index) {

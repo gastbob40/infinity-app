@@ -52,4 +52,10 @@ class CalendarNotifier extends ChangeNotifier {
     this._currentDate = this._currentDate.subtract(Duration(days: 7));
     this.notifyListeners();
   }
+
+  void fetch() async {
+    // TODO connect to repository
+    await Future.delayed(Duration(seconds: 5));
+    this.setDate(DateTime(2022));
+  }
 }
