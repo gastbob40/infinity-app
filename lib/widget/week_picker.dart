@@ -14,10 +14,9 @@ const days = [
   ['Dim', 7]
 ];
 
-class WeekView extends StatelessWidget {
-  const WeekView({Key? key}) : super(key: key);
+class WeekPicker extends StatelessWidget {
+  const WeekPicker({Key? key}) : super(key: key);
 
-  @override
   @override
   Widget build(BuildContext context) {
     return Container(

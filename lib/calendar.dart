@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:infinity/views/widget/week_view.dart';
+import 'package:infinity/widget/week_picker.dart';
 
 const Color blockColor = Color(0xFF252525);
 const Color separator = Color(0x1FFFFFFF);
@@ -67,7 +66,7 @@ class Calendar extends StatelessWidget {
           SizedBox(
             height: 30,
           ),
-          WeekView(),
+          WeekPicker(),
           SizedBox(
             height: 30,
           ),
