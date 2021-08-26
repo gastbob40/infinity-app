@@ -1,24 +1,22 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:infinity/models/calendar_notifier.dart';
+import 'package:provider/provider.dart';
 
 const Color blockColor = Color(0xFF252525);
 const Color separator = Color(0x1FFFFFFF);
 
-const days = [
-  ['Lun', 1],
-  ['Mar', 2],
-  ['Mer', 3],
-  ['Jeu', 4],
-  ['Ven', 5],
-  ['Sam', 6],
-  ['Dim', 7]
-];
+const days = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
 
 class WeekPicker extends StatelessWidget {
-  const WeekPicker({Key? key}) : super(key: key);
+  final PageController pageController = PageController(initialPage: 1);
 
   @override
   Widget build(BuildContext context) {
+    CalendarNotifier calendarNotifier = Provider.of(context);
+
     return Container(
         height: 70,
         decoration: BoxDecoration(
@@ -33,31 +31,50 @@ class WeekPicker extends StatelessWidget {
           ],
         ),
         padding: EdgeInsets.fromLTRB(8, 16, 8, 16),
-        child: PageView.builder(
-          itemCount: 3,
-          itemBuilder: (context, index)  {
-            return Container(
-              padding: EdgeInsets.symmetric(horizontal: 12),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: days.map((e) => Column(children: [
-                    Text(
-                      e[0].toString(),
-                      style: GoogleFonts.rubik(),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Text(
-                      (int.parse(e[1].toString()) + index * 7).toString(),
-                      style: GoogleFonts.rubik(
-                          fontSize: 11, color: Colors.white60),
-                    )
-                  ])).toList()
-              ),
-            );
-          },
-        )
-    );
+        child: Listener(
+          child: PageView.builder(
+            onPageChanged: (index) async {
+              print(index);
+              if (index == 2)
+                calendarNotifier.nextWeek();
+              else if (index == 0) calendarNotifier.prevWeek();
+
+              if (index != 1) {
+                pageController.jumpToPage(1);
+              }
+            },
+            itemCount: 3,
+            controller: pageController,
+            itemBuilder: (context, index) {
+              var date = calendarNotifier.currentDate;
+              if (index == 0)
+                date = date.subtract(Duration(days: 7));
+              else if (index == 2) date = date.add(Duration(days: 7));
+
+              return Container(
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: date
+                        .getWeekDays()
+                        .mapIndexed((e, i) => Column(children: [
+                              Text(
+                                days[i],
+                                style: GoogleFonts.rubik(),
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Text(
+                                e.toString(),
+                                style: GoogleFonts.rubik(
+                                    fontSize: 11, color: Colors.white60),
+                              )
+                            ]))
+                        .toList()),
+              );
+            },
+          ),
+        ));
   }
 }

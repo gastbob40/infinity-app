@@ -2,8 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:infinity/calendar.dart';
 import 'package:infinity/news.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+
+import 'models/calendar_notifier.dart';
+
 
 void main() {
+  Intl.defaultLocale = 'fr_FR';
+  initializeDateFormatting('fr_FR', '');
   runApp(MyApp());
 }
 
@@ -46,7 +54,13 @@ class Navigation extends StatefulWidget {
 class _NavigationState extends State<Navigation> {
   int _selectedIndex = 0;
 
-  List<Widget> _widgetOptions = [Calendar(), News()];
+  List<Widget> _widgetOptions = [
+    ChangeNotifierProvider.value(
+      value: CalendarNotifier(),
+      child: Calendar(),
+    )
+    , News()
+  ];
 
   void _onItemTap(int index) {
     setState(() {

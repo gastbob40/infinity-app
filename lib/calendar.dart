@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:infinity/models/calendar_notifier.dart';
 import 'package:infinity/widget/week_picker.dart';
+import 'package:provider/provider.dart';
 
 const Color blockColor = Color(0xFF252525);
 const Color separator = Color(0x1FFFFFFF);
@@ -9,7 +11,8 @@ const Color separator = Color(0x1FFFFFFF);
 class Calendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    CalendarNotifier calendarNotifier = Provider.of(context);
+
     return SafeArea(
         child: Container(
       padding: EdgeInsets.all(16),
@@ -24,14 +27,14 @@ class Calendar extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '2021',
+                    calendarNotifier.currentYear.toString(),
                     style: GoogleFonts.rubik(
                       fontWeight: FontWeight.bold,
                       fontSize: 40,
                     ),
                   ),
                   Text(
-                    'Septembre',
+                    calendarNotifier.currentMonth,
                     style: GoogleFonts.rubik(
                         fontSize: 30,
                         fontWeight: FontWeight.w100,
