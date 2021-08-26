@@ -18,7 +18,7 @@ class WeekPicker extends StatelessWidget {
     CalendarNotifier calendarNotifier = Provider.of(context);
 
     return Container(
-        height: 70,
+        height: 72,
         decoration: BoxDecoration(
           color: blockColor,
           borderRadius: BorderRadius.circular(8),
@@ -30,7 +30,7 @@ class WeekPicker extends StatelessWidget {
             )
           ],
         ),
-        padding: EdgeInsets.fromLTRB(8, 16, 8, 16),
+        padding: EdgeInsets.fromLTRB(8, 16, 8, 8),
         child: Listener(
           child: PageView.builder(
             onPageChanged: (index) async {
@@ -59,20 +59,37 @@ class WeekPicker extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: date
                         .getWeekDays()
-                        .mapIndexed((e, i) => Column(children: [
-                              Text(
-                                days[i],
-                                style: GoogleFonts.rubik(),
+                        .mapIndexed((e, i) => GestureDetector(
+                              onTap: () => calendarNotifier.setWeekDay(i),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    days[i],
+                                    style: GoogleFonts.rubik(),
+                                  ),
+                                  SizedBox(
+                                    height: 8,
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color:
+                                          i == calendarNotifier.currentWeekDay
+                                              ? Colors.white10
+                                              : Colors.transparent,
+                                      borderRadius: BorderRadius.circular(25),
+                                    ),
+                                    padding: EdgeInsets.all(4),
+                                    child: Text(
+                                      e.toString(),
+                                      style: GoogleFonts.rubik(
+                                        fontSize: 11,
+                                        color: Colors.white60,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Text(
-                                e.toString(),
-                                style: GoogleFonts.rubik(
-                                    fontSize: 11, color: Colors.white60),
-                              )
-                            ]))
+                            ))
                         .toList()),
               );
             },

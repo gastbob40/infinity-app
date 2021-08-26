@@ -12,7 +12,7 @@ extension LanguageExtension on DateTime {
 
   List<int> getWeekDays() {
     List<int> days = [];
-    DateTime start = this.subtract(Duration(days: this.weekday));
+    DateTime start = this.subtract(Duration(days: this.weekday - 1));
 
     for (var i = 0; i < 7; i++) {
       days.add(start.day);
@@ -37,6 +37,7 @@ class CalendarNotifier extends ChangeNotifier {
   String get currentMonth => _currentDate.getMonthString();
   int get currentYear => _currentDate.year;
   DateTime get currentDate => _currentDate;
+  int get currentWeekDay => _currentDate.weekday - 1;
 
   void setDate(DateTime dateTime) {
     this._currentDate = dateTime;
@@ -56,6 +57,11 @@ class CalendarNotifier extends ChangeNotifier {
   void fetch() async {
     // TODO connect to repository
     await Future.delayed(Duration(seconds: 5));
-    this.setDate(DateTime(2022));
+    // this.setDate(DateTime(2022));
+  }
+
+  void setWeekDay(int weekday) {
+    this._currentDate = this.currentDate.subtract(Duration(days: currentWeekDay)).add(Duration(days: weekday));
+    this.notifyListeners();
   }
 }

@@ -46,7 +46,7 @@ class Calendar extends StatelessWidget {
               Row(
                 children: [
                   IconButton(
-                      onPressed: null,
+                      onPressed: () => selectDate(context, calendarNotifier),
                       icon: Icon(
                         Icons.event_outlined,
                         color: Colors.white,
@@ -115,24 +115,46 @@ class Calendar extends StatelessWidget {
                       ),
                       Expanded(
                           child: Container(
-                            padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
+                        padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text('Séminaire Algo', style: GoogleFonts.rubik()),
-                            SizedBox(height: 10,),
+                            SizedBox(
+                              height: 10,
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Row(children: [
-                                  Icon(Icons.place_outlined, size: 11, color: Colors.white60,),
-                                  Text('VA 106', style: GoogleFonts.rubik(fontSize: 11, color: Colors.white60),)
-                                ],),
-                                Row(children: [
-                                  Icon(Icons.person_outlined, size: 11, color: Colors.white60,),
-                                  Text('Nom Prenom', style: GoogleFonts.rubik(fontSize: 11, color: Colors.white60),)
-                                ],)
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.place_outlined,
+                                      size: 11,
+                                      color: Colors.white60,
+                                    ),
+                                    Text(
+                                      'VA 106',
+                                      style: GoogleFonts.rubik(
+                                          fontSize: 11, color: Colors.white60),
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.person_outlined,
+                                      size: 11,
+                                      color: Colors.white60,
+                                    ),
+                                    Text(
+                                      'Nom Prenom',
+                                      style: GoogleFonts.rubik(
+                                          fontSize: 11, color: Colors.white60),
+                                    )
+                                  ],
+                                )
                               ],
                             )
                           ],
@@ -145,5 +167,18 @@ class Calendar extends StatelessWidget {
         ],
       ),
     ));
+  }
+
+  selectDate(BuildContext context, CalendarNotifier calendarNotifier) async {
+    print("select date");
+    final DateTime? selected = await showDatePicker(
+      context: context,
+      initialDate: calendarNotifier.currentDate,
+      firstDate: DateTime(2010),
+      lastDate: DateTime(2025),
+    );
+
+    if (selected != null && selected != calendarNotifier.currentDate)
+      calendarNotifier.setDate(selected);
   }
 }
