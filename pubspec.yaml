@@ -25,6 +25,7 @@ dependencies:
   google_fonts: ^2.1.0
   provider: ^6.0.0
   intl: ^0.17.0
+  dio: ^4.0.0
   flutter:
     sdk: flutter
 
