@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:infinity/domain/notifiers/calendar_notifier.dart';
+import 'package:infinity/views/pages/calendar/search_page.dart';
 import 'package:infinity/views/widget/week_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -52,7 +53,7 @@ class Calendar extends StatelessWidget {
                         color: Colors.white,
                       )),
                   PopupMenuButton<String>(
-                    onSelected: null,
+                    onSelected: (value) => popupAction(context, value),
                     itemBuilder: (BuildContext context) {
                       return {'Groups', 'Settings'}.map((String choice) {
                         return PopupMenuItem<String>(
@@ -181,5 +182,14 @@ class Calendar extends StatelessWidget {
 
     if (selected != null && selected != calendarNotifier.currentDate)
       calendarNotifier.setDate(selected);
+  }
+
+  popupAction(BuildContext context, String value) {
+    if (value == 'Groups') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => SearchPage()),
+      );
+    }
   }
 }
