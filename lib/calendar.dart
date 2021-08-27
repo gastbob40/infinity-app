@@ -76,92 +76,93 @@ class Calendar extends StatelessWidget {
           SingleChildScrollView(
             child: Column(children: [
               Container(
-                  decoration: BoxDecoration(
-                    color: blockColor,
-                    borderRadius: BorderRadius.circular(8),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black54,
-                        blurRadius: 1,
-                        offset: Offset(0, 1), // Shadow position
-                      )
-                    ],
-                  ),
-                  height: 100,
-                  padding: EdgeInsets.all(16),
-                  child: Row(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border(
-                              right: BorderSide(width: 1, color: separator)),
-                        ),
-                        padding: EdgeInsets.fromLTRB(0, 0, 16, 0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              '9h00',
-                              style: GoogleFonts.rubik(
-                                  fontWeight: FontWeight.w100),
-                            ),
-                            Text(
-                              '10h00',
-                              style: GoogleFonts.rubik(
-                                  fontWeight: FontWeight.w100),
-                            )
-                          ],
-                        ),
+                decoration: BoxDecoration(
+                  color: blockColor,
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black54,
+                      blurRadius: 1,
+                      offset: Offset(0, 1), // Shadow position
+                    )
+                  ],
+                ),
+                height: 100,
+                padding: EdgeInsets.all(16),
+                child: Row(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                            right: BorderSide(width: 1, color: separator)),
                       ),
-                      Expanded(
-                          child: Container(
-                        padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Séminaire Algo', style: GoogleFonts.rubik()),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.place_outlined,
-                                      size: 11,
-                                      color: Colors.white60,
-                                    ),
-                                    Text(
-                                      'VA 106',
-                                      style: GoogleFonts.rubik(
-                                          fontSize: 11, color: Colors.white60),
-                                    )
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.person_outlined,
-                                      size: 11,
-                                      color: Colors.white60,
-                                    ),
-                                    Text(
-                                      'Nom Prenom',
-                                      style: GoogleFonts.rubik(
-                                          fontSize: 11, color: Colors.white60),
-                                    )
-                                  ],
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      ))
-                    ],
-                  ))
+                      padding: EdgeInsets.fromLTRB(0, 0, 16, 0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            '9h00',
+                            style:
+                                GoogleFonts.rubik(fontWeight: FontWeight.w100),
+                          ),
+                          Text(
+                            '10h00',
+                            style:
+                                GoogleFonts.rubik(fontWeight: FontWeight.w100),
+                          )
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                        child: Container(
+                      padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Reprise Alexandre', style: GoogleFonts.rubik()),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.place_outlined,
+                                    size: 11,
+                                    color: Colors.white60,
+                                  ),
+                                  Text(
+                                    'VA 106',
+                                    style: GoogleFonts.rubik(
+                                        fontSize: 11, color: Colors.white60),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.person_outlined,
+                                    size: 11,
+                                    color: Colors.white60,
+                                  ),
+                                  Text(
+                                    'Nom Prenom',
+                                    style: GoogleFonts.rubik(
+                                        fontSize: 11, color: Colors.white60),
+                                  )
+                                ],
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ))
+                  ],
+                ),
+              )
             ]),
           )
         ],
@@ -174,7 +175,7 @@ class Calendar extends StatelessWidget {
     final DateTime? selected = await showDatePicker(
       context: context,
       initialDate: calendarNotifier.currentDate,
-      firstDate: DateTime(2010),
+      firstDate: DateTime(2018),
       lastDate: DateTime(2025),
     );
 
