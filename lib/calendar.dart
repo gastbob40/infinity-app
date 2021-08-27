@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:infinity/models/calendar_notifier.dart';
-import 'package:infinity/widget/week_picker.dart';
+import 'package:infinity/domain/notifiers/calendar_notifier.dart';
+import 'package:infinity/views/widget/week_picker.dart';
 import 'package:provider/provider.dart';
 
 const Color blockColor = Color(0xFF252525);
@@ -54,7 +54,7 @@ class Calendar extends StatelessWidget {
                   PopupMenuButton<String>(
                     onSelected: null,
                     itemBuilder: (BuildContext context) {
-                      return {'Logout', 'Settings'}.map((String choice) {
+                      return {'Groups', 'Settings'}.map((String choice) {
                         return PopupMenuItem<String>(
                           value: choice,
                           child: Text(choice),

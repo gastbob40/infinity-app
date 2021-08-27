@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:infinity/models/calendar_notifier.dart';
+import 'package:infinity/domain/notifiers/calendar_notifier.dart';
 import 'package:provider/provider.dart';
 
 const Color blockColor = Color(0xFF252525);

@@ -6,7 +6,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import 'models/calendar_notifier.dart';
+import 'package:infinity/domain/notifiers/calendar_notifier.dart';
 
 
 void main() {
