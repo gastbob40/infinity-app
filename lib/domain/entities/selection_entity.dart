@@ -1,6 +1,6 @@
 import 'package:infinity/domain/entities/teacher_entity.dart';
 
-enum SelectionType { GROUP, TEACHER }
+enum SelectionType { NONE, GROUP, TEACHER }
 
 class Selection {
   SelectionType type;
