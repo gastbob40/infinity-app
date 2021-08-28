@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:infinity/data/repository/selection_repository.dart';
 import 'package:infinity/domain/entities/selection_entity.dart';
 import 'package:infinity/domain/entities/teacher_entity.dart';
 import 'package:intl/intl.dart';
@@ -33,8 +34,12 @@ extension IndexedIterable<E> on Iterable<E> {
 }
 
 class CalendarNotifier extends ChangeNotifier {
+  // Repository
+  SelectionRepository _selectionRepository = SelectionRepository();
+
+  // Data
   DateTime _currentDate = new DateTime.now();
-  Selection selection = Selection.empty();
+  SelectionEntity selection = SelectionEntity.empty();
 
   int get currentDay => _currentDate.day;
 
@@ -62,7 +67,7 @@ class CalendarNotifier extends ChangeNotifier {
   }
 
   void fetch() async {
-    // TODO connect to repository
+    this.selection = await _selectionRepository.getSelection();
     await Future.delayed(Duration(seconds: 5));
     // this.setDate(DateTime(2022));
   }
@@ -76,8 +81,9 @@ class CalendarNotifier extends ChangeNotifier {
   }
 
   void setTeacher(TeacherEntity teacherEntity) {
-    this.selection =
-        Selection(type: SelectionType.TEACHER, teacherEntity: teacherEntity);
+    this.selection = SelectionEntity(
+        type: SelectionType.TEACHER, teacherEntity: teacherEntity);
+    _selectionRepository.setSelection(this.selection);
     this.notifyListeners();
   }
 }

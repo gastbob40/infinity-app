@@ -1,20 +1,21 @@
-import 'package:flutter/material.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:flutter/material.dart';
 import 'package:infinity/calendar.dart';
+import 'package:infinity/domain/notifiers/calendar_notifier.dart';
 import 'package:infinity/news.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import 'package:infinity/domain/notifiers/calendar_notifier.dart';
-
 void main() {
   Intl.defaultLocale = 'fr_FR';
   initializeDateFormatting('fr_FR', '');
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider<CalendarNotifier>(
-      create: (_) => CalendarNotifier()
-    )
+    ChangeNotifierProvider<CalendarNotifier>(create: (_) {
+      CalendarNotifier calendar = CalendarNotifier();
+      calendar.fetch();
+      return calendar;
+    })
   ], child: MyApp()));
 }
 
