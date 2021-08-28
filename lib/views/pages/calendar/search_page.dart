@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:infinity/data/repository/teacher_repository.dart';
-import 'package:infinity/domain/notifiers/calendar_notifier.dart';
 import 'package:infinity/views/widget/calendar/teacher_select_widget.dart';
-import 'package:provider/provider.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({Key? key}) : super(key: key);

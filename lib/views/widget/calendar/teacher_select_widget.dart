@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:infinity/data/repository/teacher_repository.dart';
-import 'package:infinity/domain/entities/teacher_entity.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:infinity/data/repository/teacher_repository.dart';
+import 'package:infinity/domain/entities/selection_entity.dart';
+import 'package:infinity/domain/entities/teacher_entity.dart';
+import 'package:infinity/domain/notifiers/calendar_notifier.dart';
+import 'package:provider/provider.dart';
 
 class TeacherSelectWidget extends StatefulWidget {
   const TeacherSelectWidget({Key? key}) : super(key: key);
@@ -17,6 +20,7 @@ class _TeacherSelectWidgetState extends State<TeacherSelectWidget> {
   @override
   Widget build(BuildContext context) {
     TeacherRepository teacherRepository = TeacherRepository();
+    CalendarNotifier calendarNotifier = Provider.of(context);
 
     return Container(
       child: FutureBuilder<List<TeacherEntity>>(
@@ -68,23 +72,32 @@ class _TeacherSelectWidgetState extends State<TeacherSelectWidget> {
                     color: Colors.white30,
                   ),
                   itemBuilder: (context, index) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          displayTeachers[index].name,
-                          style: GoogleFonts.rubik(fontSize: 16),
-                        ),
-                        Radio(
-                          value: displayTeachers[index].name,
-                          groupValue: displayTeachers[0].name,
-                          onChanged: null,
-                          activeColor: Theme.of(context).accentColor,
-                          materialTapTargetSize:
-                              MaterialTapTargetSize.shrinkWrap,
-                          fillColor: MaterialStateColor.resolveWith((states) => Theme.of(context).accentColor),
-                        )
-                      ],
+                    return GestureDetector(
+                      onTap: () =>
+                          calendarNotifier.setTeacher(displayTeachers[index]),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            displayTeachers[index].name,
+                            style: GoogleFonts.rubik(fontSize: 16),
+                          ),
+                          Radio(
+                            value: displayTeachers[index].id,
+                            groupValue: calendarNotifier.selection.type ==
+                                    SelectionType.TEACHER
+                                ? calendarNotifier.selection.teacherEntity?.id
+                                : -1,
+                            onChanged: (i) => calendarNotifier
+                                .setTeacher(displayTeachers[index]),
+                            activeColor: Theme.of(context).accentColor,
+                            materialTapTargetSize:
+                                MaterialTapTargetSize.shrinkWrap,
+                            fillColor: MaterialStateColor.resolveWith(
+                                (states) => Theme.of(context).accentColor),
+                          )
+                        ],
+                      ),
                     );
                   },
                 )),

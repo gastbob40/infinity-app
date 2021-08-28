@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:infinity/domain/entities/selection_entity.dart';
+import 'package:infinity/domain/entities/teacher_entity.dart';
 import 'package:intl/intl.dart';
 
 extension LanguageExtension on DateTime {
@@ -32,11 +34,16 @@ extension IndexedIterable<E> on Iterable<E> {
 
 class CalendarNotifier extends ChangeNotifier {
   DateTime _currentDate = new DateTime.now();
+  Selection selection = Selection.empty();
 
   int get currentDay => _currentDate.day;
+
   String get currentMonth => _currentDate.getMonthString();
+
   int get currentYear => _currentDate.year;
+
   DateTime get currentDate => _currentDate;
+
   int get currentWeekDay => _currentDate.weekday - 1;
 
   void setDate(DateTime dateTime) {
@@ -61,7 +68,16 @@ class CalendarNotifier extends ChangeNotifier {
   }
 
   void setWeekDay(int weekday) {
-    this._currentDate = this.currentDate.subtract(Duration(days: currentWeekDay)).add(Duration(days: weekday));
+    this._currentDate = this
+        .currentDate
+        .subtract(Duration(days: currentWeekDay))
+        .add(Duration(days: weekday));
+    this.notifyListeners();
+  }
+
+  void setTeacher(TeacherEntity teacherEntity) {
+    this.selection =
+        Selection(type: SelectionType.TEACHER, teacherEntity: teacherEntity);
     this.notifyListeners();
   }
 }

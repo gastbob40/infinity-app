@@ -6,5 +6,9 @@ class Selection {
   SelectionType type;
   TeacherEntity? teacherEntity;
 
-  Selection.name({required this.type, this.teacherEntity});
+  Selection({required this.type, this.teacherEntity});
+
+  static Selection empty() {
+    return Selection(type: SelectionType.NONE);
+  }
 }
