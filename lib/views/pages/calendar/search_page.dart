@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:infinity/data/repository/teacher_repository.dart';
 import 'package:infinity/domain/notifiers/calendar_notifier.dart';
+import 'package:infinity/views/widget/calendar/teacher_select_widget.dart';
 import 'package:provider/provider.dart';
 
 class SearchPage extends StatelessWidget {
@@ -8,9 +9,6 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TeacherRepository teacherRepository = TeacherRepository();
-    teacherRepository.getTeachers().then((value) => print(value));
-
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -26,6 +24,12 @@ class SearchPage extends StatelessWidget {
               ),
             ],
           ),
+        ),
+        body: const TabBarView(
+          children: [
+            Icon(Icons.directions_car),
+            TeacherSelectWidget(),
+          ],
         ),
       ),
     );
