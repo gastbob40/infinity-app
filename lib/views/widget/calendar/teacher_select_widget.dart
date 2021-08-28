@@ -52,18 +52,40 @@ class _TeacherSelectWidgetState extends State<TeacherSelectWidget> {
                     ),
                     fillColor: Theme.of(context).accentColor,
                     focusedBorder: UnderlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Theme.of(context).accentColor)),
+                      borderSide: BorderSide(
+                        color: Theme.of(context).accentColor,
+                      ),
+                    ),
                   ),
                 ),
-                SizedBox(height: 16,),
-                Expanded(child: ListView.builder(
+                SizedBox(
+                  height: 16,
+                ),
+                Expanded(
+                    child: ListView.separated(
                   itemCount: displayTeachers.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        child: Text(displayTeachers[index].name),
-                      );
-                    },
+                  separatorBuilder: (context, index) => Divider(
+                    color: Colors.white30,
+                  ),
+                  itemBuilder: (context, index) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          displayTeachers[index].name,
+                          style: GoogleFonts.rubik(fontSize: 16),
+                        ),
+                        Radio(
+                          value: displayTeachers[index].name,
+                          groupValue: displayTeachers[0].name,
+                          onChanged: null,
+                          activeColor: Theme.of(context).accentColor,
+                          materialTapTargetSize:
+                              MaterialTapTargetSize.shrinkWrap,
+                        È)
+                      ],
+                    );
+                  },
                 )),
               ]),
             );
