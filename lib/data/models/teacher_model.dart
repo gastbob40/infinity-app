@@ -16,7 +16,7 @@ class TeacherModel {
   });
 
   TeacherEntity toEntity() {
-    return TeacherEntity(id: this.id, name: this.name);
+    return TeacherEntity(id: this.id, name: this.firstname + ' ' + this.name);
   }
 
   factory TeacherModel.fromMap(Map<String, dynamic> map) {
@@ -27,5 +27,10 @@ class TeacherModel {
         internal: map['internal'],
         zid: map['zid']
     );
+  }
+
+  @override
+  String toString() {
+    return this.firstname + ' ' + this.name;
   }
 }
