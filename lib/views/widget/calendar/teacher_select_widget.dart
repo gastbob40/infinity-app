@@ -82,7 +82,8 @@ class _TeacherSelectWidgetState extends State<TeacherSelectWidget> {
                           activeColor: Theme.of(context).accentColor,
                           materialTapTargetSize:
                               MaterialTapTargetSize.shrinkWrap,
-                        È)
+                          fillColor: MaterialStateColor.resolveWith((states) => Theme.of(context).accentColor),
+                        )
                       ],
                     );
                   },
