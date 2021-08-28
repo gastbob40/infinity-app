@@ -8,11 +8,14 @@ import 'package:provider/provider.dart';
 
 import 'package:infinity/domain/notifiers/calendar_notifier.dart';
 
-
 void main() {
   Intl.defaultLocale = 'fr_FR';
   initializeDateFormatting('fr_FR', '');
-  runApp(MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider<CalendarNotifier>(
+      create: (_) => CalendarNotifier()
+    )
+  ], child: MyApp()));
 }
 
 const Color darkBackground = Color(0xFF2D2D2D);
@@ -23,17 +26,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return AdaptiveTheme(
       light: ThemeData(
-        brightness: Brightness.light,
-        primarySwatch: Colors.blue,
-        accentColor: Colors.amber,
-        backgroundColor: Colors.white
-      ),
+          brightness: Brightness.light,
+          primarySwatch: Colors.blue,
+          accentColor: Colors.amber,
+          backgroundColor: Colors.white),
       dark: ThemeData(
-        brightness: Brightness.dark,
-        primarySwatch: Colors.blue,
-        accentColor: Colors.amber,
-        backgroundColor: darkBackground
-      ),
+          brightness: Brightness.dark,
+          primarySwatch: Colors.blue,
+          accentColor: Colors.amber,
+          backgroundColor: darkBackground),
       initial: AdaptiveThemeMode.system,
       builder: (theme, darkTheme) => MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -55,14 +56,8 @@ class _NavigationState extends State<Navigation> {
   int _selectedIndex = 0;
 
   List<Widget> _widgetOptions = [
-    ChangeNotifierProvider(
-      create: (_) {
-        CalendarNotifier notifier = CalendarNotifier();
-        notifier.fetch();
-        return notifier;
-      },
-      child: Calendar(),
-    )    , News()
+    Calendar(),
+    News()
   ];
 
   void _onItemTap(int index) {
