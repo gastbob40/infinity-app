@@ -78,9 +78,11 @@ class _GroupSelectWidgetState extends State<GroupSelectWidget> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            displayGroups[index].name,
-                            style: GoogleFonts.rubik(fontSize: 16),
+                          Expanded(
+                            child: Text(
+                              displayGroups[index].name,
+                              style: GoogleFonts.rubik(fontSize: 16),
+                            ),
                           ),
                           Radio(
                             value: displayGroups[index].id,

@@ -78,9 +78,11 @@ class _TeacherSelectWidgetState extends State<TeacherSelectWidget> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            displayTeachers[index].name,
-                            style: GoogleFonts.rubik(fontSize: 16),
+                          Expanded(
+                            child: Text(
+                              displayTeachers[index].name,
+                              style: GoogleFonts.rubik(fontSize: 16),
+                            ),
                           ),
                           Radio(
                             value: displayTeachers[index].id,
