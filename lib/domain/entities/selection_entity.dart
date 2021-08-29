@@ -48,4 +48,16 @@ class SelectionEntity {
 
     return empty();
   }
+
+  @override
+  String toString() {
+    switch (type) {
+      case SelectionType.NONE:
+        return "{type: none}";
+      case SelectionType.TEACHER:
+        return "{type: teacher}";
+      case SelectionType.GROUP:
+        return "{type: group}";
+    }
+  }
 }

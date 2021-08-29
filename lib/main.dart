@@ -1,8 +1,8 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:infinity/calendar.dart';
 import 'package:infinity/domain/notifiers/calendar_notifier.dart';
 import 'package:infinity/news.dart';
+import 'package:infinity/views/pages/calendar/calendar_page.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -56,10 +56,7 @@ class Navigation extends StatefulWidget {
 class _NavigationState extends State<Navigation> {
   int _selectedIndex = 0;
 
-  List<Widget> _widgetOptions = [
-    Calendar(),
-    News()
-  ];
+  List<Widget> _widgetOptions = [CalendarPage(), News()];
 
   void _onItemTap(int index) {
     setState(() {
