@@ -88,7 +88,7 @@ class _GroupSelectWidgetState extends State<GroupSelectWidget> {
                             value: displayGroups[index].id,
                             groupValue: calendarNotifier.selection.type ==
                                     SelectionType.GROUP
-                                ? calendarNotifier.selection.teacherEntity?.id
+                                ? calendarNotifier.selection.groupEntity?.id
                                 : -1,
                             onChanged: (i) =>
                                 calendarNotifier.setGroup(displayGroups[index]),
