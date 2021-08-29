@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:infinity/data/repository/selection_repository.dart';
+import 'package:infinity/domain/entities/group_entity.dart';
 import 'package:infinity/domain/entities/selection_entity.dart';
 import 'package:infinity/domain/entities/teacher_entity.dart';
 import 'package:intl/intl.dart';
@@ -83,6 +84,13 @@ class CalendarNotifier extends ChangeNotifier {
   void setTeacher(TeacherEntity teacherEntity) {
     this.selection = SelectionEntity(
         type: SelectionType.TEACHER, teacherEntity: teacherEntity);
+    _selectionRepository.setSelection(this.selection);
+    this.notifyListeners();
+  }
+
+  setGroup(GroupEntity groupEntity) {
+    this.selection =
+        SelectionEntity(type: SelectionType.GROUP, groupEntity: groupEntity);
     _selectionRepository.setSelection(this.selection);
     this.notifyListeners();
   }
