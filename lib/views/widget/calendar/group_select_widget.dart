@@ -119,7 +119,7 @@ class _GroupSelectWidgetState extends State<GroupSelectWidget> {
 
   void filter(String filter) {
     setState(() {
-      displayGroups = this.displayGroups.where((e) => e.match(filter)).toList();
+      displayGroups = this.allGroups.where((e) => e.match(filter)).toList();
     });
   }
 }
