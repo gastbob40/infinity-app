@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:infinity/data/repository/selection_repository.dart';
+import 'package:infinity/domain/entities/day_reservations_entity.dart';
 import 'package:infinity/domain/entities/group_entity.dart';
 import 'package:infinity/domain/entities/selection_entity.dart';
 import 'package:infinity/domain/entities/teacher_entity.dart';
@@ -93,5 +94,10 @@ class CalendarNotifier extends ChangeNotifier {
         SelectionEntity(type: SelectionType.GROUP, groupEntity: groupEntity);
     _selectionRepository.setSelection(this.selection);
     this.notifyListeners();
+  }
+
+  Future<List<DayReservationsEntity>> getDaysReservations() async {
+    await Future.delayed(Duration(seconds: 5));
+    return [];
   }
 }

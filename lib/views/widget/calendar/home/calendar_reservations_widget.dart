@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:infinity/domain/entities/day_reservations_entity.dart';
 import 'package:infinity/domain/entities/selection_entity.dart';
 import 'package:infinity/domain/notifiers/calendar_notifier.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +18,32 @@ class CalendarReservationsWidget extends StatelessWidget {
     if (calendarNotifier.selection.type == SelectionType.NONE) {
       return Expanded(child: Text('No group selected'));
     }
+
+    return Expanded(
+      child: FutureBuilder<List<DayReservationsEntity>>(
+          future: calendarNotifier.getDaysReservations(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Text(
+                'There was an error :(',
+                style: Theme.of(context).textTheme.headline5,
+              );
+            }
+
+            if (snapshot.hasData) {
+              return Text(
+                'There is some data',
+                style: Theme.of(context).textTheme.headline5,
+              );
+            }
+
+            return Center(
+              child: CircularProgressIndicator(
+                color: Theme.of(context).accentColor,
+              ),
+            );
+          }),
+    );
 
     return Expanded(
       child: SingleChildScrollView(
@@ -62,51 +89,51 @@ class CalendarReservationsWidget extends StatelessWidget {
                 ),
                 Expanded(
                     child: Container(
-                      padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                  padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Reprise Alexandre', style: GoogleFonts.rubik()),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Reprise Alexandre', style: GoogleFonts.rubik()),
-                          SizedBox(
-                            height: 10,
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.place_outlined,
+                                size: 11,
+                                color: Colors.white60,
+                              ),
+                              Text(
+                                'VA 106',
+                                style: GoogleFonts.rubik(
+                                    fontSize: 11, color: Colors.white60),
+                              )
+                            ],
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.place_outlined,
-                                    size: 11,
-                                    color: Colors.white60,
-                                  ),
-                                  Text(
-                                    'VA 106',
-                                    style: GoogleFonts.rubik(
-                                        fontSize: 11, color: Colors.white60),
-                                  )
-                                ],
+                              Icon(
+                                Icons.person_outlined,
+                                size: 11,
+                                color: Colors.white60,
                               ),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.person_outlined,
-                                    size: 11,
-                                    color: Colors.white60,
-                                  ),
-                                  Text(
-                                    'Nom Prenom',
-                                    style: GoogleFonts.rubik(
-                                        fontSize: 11, color: Colors.white60),
-                                  )
-                                ],
+                              Text(
+                                'Nom Prenom',
+                                style: GoogleFonts.rubik(
+                                    fontSize: 11, color: Colors.white60),
                               )
                             ],
                           )
                         ],
-                      ),
-                    ))
+                      )
+                    ],
+                  ),
+                ))
               ],
             ),
           )
