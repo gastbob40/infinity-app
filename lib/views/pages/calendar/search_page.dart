@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:infinity/views/widget/calendar/group_select_widget.dart';
-import 'package:infinity/views/widget/calendar/teacher_select_widget.dart';
+import 'package:infinity/views/widget/calendar/search/group_select_widget.dart';
+import 'package:infinity/views/widget/calendar/search/teacher_select_widget.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
