@@ -21,28 +21,29 @@ class CalendarReservationsWidget extends StatelessWidget {
 
     return Expanded(
       child: FutureBuilder<List<DayReservationsEntity>>(
-          future: calendarNotifier.getDaysReservations(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return Text(
-                'There was an error :(',
-                style: Theme.of(context).textTheme.headline5,
-              );
-            }
-
-            if (snapshot.hasData) {
-              return Text(
-                'There is some data',
-                style: Theme.of(context).textTheme.headline5,
-              );
-            }
-
-            return Center(
-              child: CircularProgressIndicator(
-                color: Theme.of(context).accentColor,
-              ),
+        future: calendarNotifier.getDaysReservations(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Text(
+              'There was an error :(',
+              style: Theme.of(context).textTheme.headline5,
             );
-          }),
+          }
+
+          if (snapshot.hasData) {
+            return Text(
+              'There is some data',
+              style: Theme.of(context).textTheme.headline5,
+            );
+          }
+
+          return Center(
+            child: CircularProgressIndicator(
+              color: Theme.of(context).accentColor,
+            ),
+          );
+        },
+      ),
     );
 
     return Expanded(
