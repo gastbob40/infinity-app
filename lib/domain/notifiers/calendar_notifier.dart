@@ -70,8 +70,7 @@ class CalendarNotifier extends ChangeNotifier {
 
   void fetch() async {
     this.selection = await _selectionRepository.getSelection();
-    await Future.delayed(Duration(seconds: 5));
-    // this.setDate(DateTime(2022));
+    this.notifyListeners();
   }
 
   void setWeekDay(int weekday) {
@@ -97,7 +96,7 @@ class CalendarNotifier extends ChangeNotifier {
   }
 
   Future<List<DayReservationsEntity>> getDaysReservations() async {
-    await Future.delayed(Duration(seconds: 5));
+    await Future.delayed(Duration(minutes: 5));
     return [];
   }
 }
