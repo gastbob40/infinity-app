@@ -65,19 +65,23 @@ class CalendarReservationsItemWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.place_outlined,
-                          size: 11,
-                          color: Colors.white60,
-                        ),
-                        Text(
-                          reservationEntity.rooms,
-                          style: GoogleFonts.rubik(
-                              fontSize: 11, color: Colors.white60),
-                        )
-                      ],
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.place_outlined,
+                            size: 11,
+                            color: Colors.white60,
+                          ),
+                          Expanded(
+                            child: Text(
+                              reservationEntity.rooms,
+                              style: GoogleFonts.rubik(
+                                  fontSize: 11, color: Colors.white60),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                     Row(
                       children: [
