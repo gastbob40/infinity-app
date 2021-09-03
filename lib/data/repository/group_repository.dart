@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:infinity/data/models/group_repository.dart';
+import 'package:infinity/data/models/group_model.dart';
 import 'package:infinity/domain/entities/group_entity.dart';
 
 class GroupRepository {

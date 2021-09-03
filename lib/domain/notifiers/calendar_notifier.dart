@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:infinity/data/repository/reservation_repository.dart';
 import 'package:infinity/data/repository/selection_repository.dart';
 import 'package:infinity/domain/entities/day_reservations_entity.dart';
 import 'package:infinity/domain/entities/group_entity.dart';
@@ -38,6 +39,7 @@ extension IndexedIterable<E> on Iterable<E> {
 class CalendarNotifier extends ChangeNotifier {
   // Repository
   SelectionRepository _selectionRepository = SelectionRepository();
+  ReservationRepository _reservationRepository = ReservationRepository();
 
   // Data
   DateTime _currentDate = new DateTime.now();
@@ -96,6 +98,7 @@ class CalendarNotifier extends ChangeNotifier {
   }
 
   Future<List<DayReservationsEntity>> getDaysReservations() async {
+    await _reservationRepository.getReservation(selection);
     await Future.delayed(Duration(minutes: 5));
     return [];
   }

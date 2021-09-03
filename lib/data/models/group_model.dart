@@ -22,10 +22,12 @@ class GroupModel {
   factory GroupModel.fromMap(Map<String, dynamic> map) {
     List<GroupModel> realChildren = [];
 
-    map['children']
-        .map((x) => GroupModel.fromMap(x))
-        .toList()
-        .forEach((x) => realChildren.add(x));
+    if (map.containsKey('children')) {
+      map['children']
+          .map((x) => GroupModel.fromMap(x))
+          .toList()
+          .forEach((x) => realChildren.add(x));
+    }
 
     return GroupModel(
         id: map['id'],
