@@ -3,6 +3,7 @@ import 'package:infinity/data/repository/reservation_repository.dart';
 import 'package:infinity/data/repository/selection_repository.dart';
 import 'package:infinity/domain/entities/day_reservations_entity.dart';
 import 'package:infinity/domain/entities/group_entity.dart';
+import 'package:infinity/domain/entities/reservation_entity.dart';
 import 'package:infinity/domain/entities/selection_entity.dart';
 import 'package:infinity/domain/entities/teacher_entity.dart';
 import 'package:intl/intl.dart';
@@ -44,6 +45,7 @@ class CalendarNotifier extends ChangeNotifier {
   // Data
   DateTime _currentDate = new DateTime.now();
   SelectionEntity selection = SelectionEntity.empty();
+  List<DayReservationsEntity> daysReservations = [];
 
   int get currentDay => _currentDate.day;
 
@@ -54,6 +56,17 @@ class CalendarNotifier extends ChangeNotifier {
   DateTime get currentDate => _currentDate;
 
   int get currentWeekDay => _currentDate.weekday - 1;
+
+  List<ReservationEntity> getDayReservation(DateTime date) {
+    for (int i = 0; i < daysReservations.length; i++) {
+      DayReservationsEntity element = daysReservations[i];
+      if (element.year == date.year &&
+          element.month == date.month &&
+          element.day == date.day) return element.reservations;
+    }
+
+    return [];
+  }
 
   void setDate(DateTime dateTime) {
     this._currentDate = dateTime;
@@ -98,8 +111,8 @@ class CalendarNotifier extends ChangeNotifier {
   }
 
   Future<List<DayReservationsEntity>> getDaysReservations() async {
-    await _reservationRepository.getReservation(selection);
-    await Future.delayed(Duration(minutes: 5));
+    this.daysReservations =
+        await _reservationRepository.getReservation(selection);
     return [];
   }
 }
