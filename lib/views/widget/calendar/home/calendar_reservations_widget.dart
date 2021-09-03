@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:infinity/domain/entities/day_reservations_entity.dart';
 import 'package:infinity/domain/entities/selection_entity.dart';
 import 'package:infinity/domain/notifiers/calendar_notifier.dart';
+import 'package:infinity/views/widget/calendar/home/calendar_reservations_item_widget.dart';
 import 'package:provider/provider.dart';
 
 const Color blockColor = Color(0xFF252525);
@@ -19,31 +20,33 @@ class CalendarReservationsWidget extends StatelessWidget {
       return Expanded(child: Text('No group selected'));
     }
 
-    return Expanded(
-      child: FutureBuilder<List<DayReservationsEntity>>(
-        future: calendarNotifier.getDaysReservations(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Text(
-              'There was an error :(',
-              style: Theme.of(context).textTheme.headline5,
-            );
-          }
+    return FutureBuilder<List<DayReservationsEntity>>(
+      future: calendarNotifier.getDaysReservations(),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Text(
+            'There was an error :(',
+            style: Theme.of(context).textTheme.headline5,
+          );
+        }
 
-          if (snapshot.hasData) {
-            return Text(
-              'There is some data',
-              style: Theme.of(context).textTheme.headline5,
-            );
-          }
-
-          return Center(
-            child: CircularProgressIndicator(
-              color: Theme.of(context).accentColor,
+        if (snapshot.hasData) {
+          return SingleChildScrollView(
+            child: Column(
+              children: calendarNotifier
+                  .getDayReservation(calendarNotifier.currentDate)
+                  .map((e) => CalendarReservationsItemWidget(e))
+                  .toList(),
             ),
           );
-        },
-      ),
+        }
+
+        return Center(
+          child: CircularProgressIndicator(
+            color: Theme.of(context).accentColor,
+          ),
+        );
+      },
     );
 
     return Expanded(

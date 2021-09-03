@@ -47,8 +47,8 @@ class ReservationModel {
         type: map['type']['type'],
         name: map['name'],
         online: map['online'],
-        startDate: DateTime.parse(map['startDate']),
-        endDate: DateTime.parse(map['endDate']),
+        startDate: DateTime.parse(map['startDate']).add(Duration(hours: 2)),
+        endDate: DateTime.parse(map['endDate']).add(Duration(hours: 2)),
         course:
             map['course'] == null ? null : CourseModel.fromMap(map['course']),
         groups: groups,
