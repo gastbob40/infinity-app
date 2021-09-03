@@ -17,4 +17,9 @@ class RoomModel {
         capacity: map['capacity'],
         name: map['name']);
   }
+
+  @override
+  String toString() {
+    return this.name;
+  }
 }

@@ -19,18 +19,10 @@ class ReservationRepository {
         final data = List<Map<String, dynamic>>.from(response.data);
         List<ReservationModel> reservations =
             data.map((e) => ReservationModel.fromMap(e)).toList();
-        print(reservations);
-        // return teachers;
-        return [];
+        return reservations;
       }
       return [];
-    } on DioError catch (err) {
-      print(err);
-    } on SocketException catch (err) {
-      print(err);
-    } on Exception catch (e) {
-      print(e);
-    }
+    } on DioError catch (err) {} on SocketException catch (err) {} on Exception catch (e) {}
 
     return [];
   }
@@ -39,6 +31,8 @@ class ReservationRepository {
       SelectionEntity selectionEntity) async {
     List<ReservationModel> reservations =
         await this._getGroupReservations(selectionEntity);
+
+    print(reservations);
     return [];
   }
 }

@@ -20,4 +20,9 @@ class CourseModel {
         code: map['code'],
         duration: map['duration']);
   }
+
+  @override
+  String toString() {
+    return this.name;
+  }
 }
