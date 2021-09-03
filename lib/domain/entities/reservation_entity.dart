@@ -6,6 +6,7 @@ class ReservationEntity {
   DateTime endDate;
   String type;
   String name;
+  int? courseId;
 
   ReservationEntity(
       {required this.teachers,
@@ -14,5 +15,6 @@ class ReservationEntity {
       required this.startDate,
       required this.endDate,
       required this.type,
-      required this.name});
+      required this.name,
+      required this.courseId});
 }
