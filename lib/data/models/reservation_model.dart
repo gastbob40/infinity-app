@@ -2,6 +2,7 @@ import 'package:infinity/data/models/course_model.dart';
 import 'package:infinity/data/models/group_model.dart';
 import 'package:infinity/data/models/room_model.dart';
 import 'package:infinity/data/models/teacher_model.dart';
+import 'package:infinity/domain/entities/reservation_entity.dart';
 
 class ReservationModel {
   final int id;
@@ -58,5 +59,17 @@ class ReservationModel {
   @override
   String toString() {
     return this.name + '[' + this.type + '][' + this.id.toString() + ']';
+  }
+
+  ReservationEntity toEntity() {
+    return ReservationEntity(
+        teachers: teachers.map((e) => e.firstname + ' ' + e.name).join(', '),
+        rooms: rooms.map((e) => e.name).join(', '),
+        groups: groups.map((e) => e.name).join(', '),
+        startDate: startDate,
+        endDate: endDate,
+        type: type,
+        name: name,
+        courseId: course?.id);
   }
 }

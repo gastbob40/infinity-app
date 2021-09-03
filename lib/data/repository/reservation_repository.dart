@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:infinity/data/models/reservation_model.dart';
+import 'package:infinity/domain/entities/day_reservations_entity.dart';
 import 'package:infinity/domain/entities/selection_entity.dart';
-import 'package:infinity/domain/entities/teacher_entity.dart';
 
 class ReservationRepository {
   static const String zeusGroupUrl = 'https://zeus.infinity.study/api/groups/';
@@ -27,12 +27,34 @@ class ReservationRepository {
     return [];
   }
 
-  Future<List<TeacherEntity>> getReservation(
+  Future<List<DayReservationsEntity>> getReservation(
       SelectionEntity selectionEntity) async {
     List<ReservationModel> reservations =
         await this._getGroupReservations(selectionEntity);
 
+    List<DayReservationsEntity> daysReservations = [];
+
+    reservations.forEach((reservation) {
+      List<DayReservationsEntity> possible = daysReservations
+          .where((x) =>
+              x.day == reservation.startDate.day &&
+              x.month == reservation.startDate.month &&
+              x.year == reservation.startDate.year)
+          .toList();
+
+      if (possible.isEmpty) {
+        DayReservationsEntity current = DayReservationsEntity(
+            year: reservation.startDate.year,
+            month: reservation.startDate.month,
+            day: reservation.startDate.day);
+        current.reservations.add(reservation.toEntity());
+        daysReservations.add(current);
+      } else {
+        possible.first.reservations.add(reservation.toEntity());
+      }
+    });
+
     print(reservations);
-    return [];
+    return daysReservations;
   }
 }
