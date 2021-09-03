@@ -28,6 +28,7 @@ class CalendarReservationsItemWidget extends StatelessWidget {
       padding: EdgeInsets.all(16),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
             decoration: BoxDecoration(
@@ -68,10 +69,13 @@ class CalendarReservationsItemWidget extends StatelessWidget {
                     Expanded(
                       child: Row(
                         children: [
-                          Icon(
-                            Icons.place_outlined,
-                            size: 11,
-                            color: Colors.white60,
+                          Padding(
+                            padding: const EdgeInsets.only(right: 4),
+                            child: Icon(
+                              Icons.place_outlined,
+                              size: 11,
+                              color: Colors.white60,
+                            ),
                           ),
                           Expanded(
                             child: Text(
@@ -83,19 +87,22 @@ class CalendarReservationsItemWidget extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.person_outlined,
-                          size: 11,
-                          color: Colors.white60,
-                        ),
-                        Text(
-                          reservationEntity.teachers,
-                          style: GoogleFonts.rubik(
-                              fontSize: 11, color: Colors.white60),
-                        )
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8, right: 4),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.person_outlined,
+                            size: 11,
+                            color: Colors.white60,
+                          ),
+                          Text(
+                            reservationEntity.teachers,
+                            style: GoogleFonts.rubik(
+                                fontSize: 11, color: Colors.white60),
+                          )
+                        ],
+                      ),
                     )
                   ],
                 )
