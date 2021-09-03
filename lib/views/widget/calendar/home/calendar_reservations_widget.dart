@@ -31,12 +31,14 @@ class CalendarReservationsWidget extends StatelessWidget {
         }
 
         if (snapshot.hasData) {
-          return SingleChildScrollView(
-            child: Column(
-              children: calendarNotifier
-                  .getDayReservation(calendarNotifier.currentDate)
-                  .map((e) => CalendarReservationsItemWidget(e))
-                  .toList(),
+          return Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: calendarNotifier
+                    .getDayReservation(calendarNotifier.currentDate)
+                    .map((e) => CalendarReservationsItemWidget(e))
+                    .toList(),
+              ),
             ),
           );
         }
