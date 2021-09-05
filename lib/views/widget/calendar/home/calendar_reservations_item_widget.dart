@@ -13,93 +13,76 @@ class CalendarReservationsItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print(this.reservationEntity);
-    return Container(
-      decoration: BoxDecoration(
-        color: blockColor,
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black54,
-            blurRadius: 1,
-            offset: Offset(0, 1), // Shadow position
-          )
-        ],
-      ),
-      padding: EdgeInsets.all(16),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              border: Border(right: BorderSide(width: 1, color: separator)),
+    return GestureDetector(
+      onTap: () => showReservationEntity(context, this.reservationEntity),
+      behavior: HitTestBehavior.translucent,
+      child: Container(
+        decoration: BoxDecoration(
+          color: blockColor,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black54,
+              blurRadius: 1,
+              offset: Offset(0, 1), // Shadow position
+            )
+          ],
+        ),
+        padding: EdgeInsets.all(16),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                border: Border(right: BorderSide(width: 1, color: separator)),
+              ),
+              padding: EdgeInsets.fromLTRB(0, 0, 16, 0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    reservationEntity.getFormattedStart(),
+                    style: GoogleFonts.rubik(fontWeight: FontWeight.w100),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Text(
+                    reservationEntity.getFormattedEnd(),
+                    style: GoogleFonts.rubik(fontWeight: FontWeight.w100),
+                  )
+                ],
+              ),
             ),
-            padding: EdgeInsets.fromLTRB(0, 0, 16, 0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  reservationEntity.getFormattedStart(),
-                  style: GoogleFonts.rubik(fontWeight: FontWeight.w100),
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Text(
-                  reservationEntity.getFormattedEnd(),
-                  style: GoogleFonts.rubik(fontWeight: FontWeight.w100),
-                )
-              ],
-            ),
-          ),
-          Expanded(
-              child: Container(
-            padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(reservationEntity.name, style: GoogleFonts.rubik()),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 4),
-                            child: Icon(
-                              Icons.place_outlined,
-                              size: 11,
-                              color: Colors.white60,
-                            ),
-                          ),
-                          Expanded(
-                            child: Text(
-                              reservationEntity.rooms,
-                              style: GoogleFonts.rubik(
-                                  fontSize: 11, color: Colors.white60),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 8, right: 4),
+            Expanded(
+                child: Container(
+              padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(reservationEntity.name, style: GoogleFonts.rubik()),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
                         child: Row(
                           children: [
-                            Icon(
-                              Icons.person_outlined,
-                              size: 11,
-                              color: Colors.white60,
+                            Padding(
+                              padding: const EdgeInsets.only(right: 4),
+                              child: Icon(
+                                Icons.place_outlined,
+                                size: 11,
+                                color: Colors.white60,
+                              ),
                             ),
                             Expanded(
                               child: Text(
-                                reservationEntity.teachers,
+                                reservationEntity.rooms,
                                 style: GoogleFonts.rubik(
                                     fontSize: 11, color: Colors.white60),
                               ),
@@ -107,15 +90,73 @@ class CalendarReservationsItemWidget extends StatelessWidget {
                           ],
                         ),
                       ),
-                    )
-                  ],
-                )
-              ],
-            ),
-          ))
-        ],
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8, right: 4),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.person_outlined,
+                                size: 11,
+                                color: Colors.white60,
+                              ),
+                              Expanded(
+                                child: Text(
+                                  reservationEntity.teachers,
+                                  style: GoogleFonts.rubik(
+                                      fontSize: 11, color: Colors.white60),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ))
+          ],
+        ),
+        margin: EdgeInsets.only(bottom: 16),
       ),
-      margin: EdgeInsets.only(bottom: 16),
+    );
+  }
+
+  showReservationEntity(
+      BuildContext context, ReservationEntity reservationEntity) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 200,
+          padding: EdgeInsets.all(16),
+          child: Column(
+            children: [
+              Text(
+                reservationEntity.name,
+                style: GoogleFonts.rubik(fontSize: 18),
+              ),
+              Text(
+                reservationEntity.type,
+                style: GoogleFonts.rubik(
+                  fontSize: 13,
+                  color: Colors.white60,
+                ),
+              ),
+              Text(
+                reservationEntity.getFormattedStart() +
+                    ' to ' +
+                    reservationEntity.getFormattedEnd(),
+                style: GoogleFonts.rubik(
+                  fontSize: 13,
+                  color: Colors.white60,
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
