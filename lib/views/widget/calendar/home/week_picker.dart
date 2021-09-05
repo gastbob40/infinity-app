@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:infinity/domain/notifiers/calendar_notifier.dart';
@@ -60,6 +59,7 @@ class WeekPicker extends StatelessWidget {
                         .getWeekDays()
                         .mapIndexed((e, i) => GestureDetector(
                               onTap: () => calendarNotifier.setWeekDay(i),
+                              behavior: HitTestBehavior.translucent,
                               child: Column(
                                 children: [
                                   Text(
