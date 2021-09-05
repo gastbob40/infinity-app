@@ -54,7 +54,6 @@ class ReservationRepository {
       }
     });
 
-    print(reservations);
     return daysReservations;
   }
 }
