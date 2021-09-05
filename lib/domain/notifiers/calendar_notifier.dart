@@ -46,6 +46,7 @@ class CalendarNotifier extends ChangeNotifier {
   DateTime _currentDate = new DateTime.now();
   SelectionEntity selection = SelectionEntity.empty();
   List<DayReservationsEntity> daysReservations = [];
+  bool _loading = true;
 
   int get currentDay => _currentDate.day;
 
@@ -56,6 +57,8 @@ class CalendarNotifier extends ChangeNotifier {
   DateTime get currentDate => _currentDate;
 
   int get currentWeekDay => _currentDate.weekday - 1;
+
+  bool get loading => _loading;
 
   List<ReservationEntity> getDayReservation(DateTime date) {
     for (int i = 0; i < daysReservations.length; i++) {
@@ -84,7 +87,11 @@ class CalendarNotifier extends ChangeNotifier {
   }
 
   void fetch() async {
+    this._loading = true;
     this.selection = await _selectionRepository.getSelection();
+    this.daysReservations =
+        await _reservationRepository.getReservation(selection);
+    this._loading = false;
     this.notifyListeners();
   }
 
@@ -108,11 +115,5 @@ class CalendarNotifier extends ChangeNotifier {
         SelectionEntity(type: SelectionType.GROUP, groupEntity: groupEntity);
     _selectionRepository.setSelection(this.selection);
     this.notifyListeners();
-  }
-
-  Future<List<DayReservationsEntity>> getDaysReservations() async {
-    this.daysReservations =
-        await _reservationRepository.getReservation(selection);
-    return [];
   }
 }

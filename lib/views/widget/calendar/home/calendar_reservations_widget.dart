@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:infinity/domain/entities/day_reservations_entity.dart';
 import 'package:infinity/domain/entities/selection_entity.dart';
 import 'package:infinity/domain/notifiers/calendar_notifier.dart';
 import 'package:infinity/views/widget/calendar/home/calendar_reservations_item_widget.dart';
@@ -20,130 +18,24 @@ class CalendarReservationsWidget extends StatelessWidget {
       return Expanded(child: Text('No group selected'));
     }
 
-    return FutureBuilder<List<DayReservationsEntity>>(
-      future: calendarNotifier.getDaysReservations(),
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return Text(
-            'There was an error :(',
-            style: Theme.of(context).textTheme.headline5,
-          );
-        }
-
-        if (snapshot.hasData) {
-          return Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: calendarNotifier
-                    .getDayReservation(calendarNotifier.currentDate)
-                    .map((e) => CalendarReservationsItemWidget(e))
-                    .toList(),
-              ),
-            ),
-          );
-        }
-
-        return Center(
+    if (calendarNotifier.loading == true) {
+      return Expanded(
+        child: Center(
           child: CircularProgressIndicator(
             color: Theme.of(context).accentColor,
           ),
-        );
-      },
-    );
+        ),
+      );
+    }
 
     return Expanded(
       child: SingleChildScrollView(
-        child: Column(children: [
-          Container(
-            decoration: BoxDecoration(
-              color: blockColor,
-              borderRadius: BorderRadius.circular(8),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black54,
-                  blurRadius: 1,
-                  offset: Offset(0, 1), // Shadow position
-                )
-              ],
-            ),
-            padding: EdgeInsets.all(16),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    border:
-                        Border(right: BorderSide(width: 1, color: separator)),
-                  ),
-                  padding: EdgeInsets.fromLTRB(0, 0, 16, 0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '9h00',
-                        style: GoogleFonts.rubik(fontWeight: FontWeight.w100),
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      Text(
-                        '10h00',
-                        style: GoogleFonts.rubik(fontWeight: FontWeight.w100),
-                      )
-                    ],
-                  ),
-                ),
-                Expanded(
-                    child: Container(
-                  padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Reprise Alexandre', style: GoogleFonts.rubik()),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.place_outlined,
-                                size: 11,
-                                color: Colors.white60,
-                              ),
-                              Text(
-                                'VA 106',
-                                style: GoogleFonts.rubik(
-                                    fontSize: 11, color: Colors.white60),
-                              )
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.person_outlined,
-                                size: 11,
-                                color: Colors.white60,
-                              ),
-                              Text(
-                                'Nom Prenom',
-                                style: GoogleFonts.rubik(
-                                    fontSize: 11, color: Colors.white60),
-                              )
-                            ],
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ))
-              ],
-            ),
-          )
-        ]),
+        child: Column(
+          children: calendarNotifier
+              .getDayReservation(calendarNotifier.currentDate)
+              .map((e) => CalendarReservationsItemWidget(e))
+              .toList(),
+        ),
       ),
     );
   }
