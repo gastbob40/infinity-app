@@ -107,7 +107,7 @@ class CalendarNotifier extends ChangeNotifier {
     this.selection = SelectionEntity(
         type: SelectionType.TEACHER, teacherEntity: teacherEntity);
     _selectionRepository.setSelection(this.selection);
-    this.notifyListeners();
+    this.fetch();
   }
 
   setGroup(GroupEntity groupEntity) {
@@ -115,5 +115,6 @@ class CalendarNotifier extends ChangeNotifier {
         SelectionEntity(type: SelectionType.GROUP, groupEntity: groupEntity);
     _selectionRepository.setSelection(this.selection);
     this.notifyListeners();
+    this.fetch();
   }
 }
