@@ -128,9 +128,11 @@ class CalendarReservationsItemWidget extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          height: 200,
+          height: 250,
           padding: EdgeInsets.all(16),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 reservationEntity.name,
@@ -144,14 +146,95 @@ class CalendarReservationsItemWidget extends StatelessWidget {
                   color: Colors.white60,
                 ),
               ),
-              Text(
-                reservationEntity.getFormattedStart() +
-                    ' to ' +
-                    reservationEntity.getFormattedEnd(),
-                style: GoogleFonts.rubik(
-                  fontSize: 13,
-                  color: Colors.white60,
-                ),
+              SizedBox(
+                height: 12,
+              ),
+              Row(
+                children: [
+                  Icon(
+                    Icons.schedule_outlined,
+                    size: 15,
+                    color: Colors.white60,
+                  ),
+                  SizedBox(
+                    width: 4,
+                  ),
+                  Expanded(
+                    child: Text(
+                      reservationEntity.getFormattedStart() +
+                          ' to ' +
+                          reservationEntity.getFormattedEnd(),
+                      style: GoogleFonts.rubik(
+                          fontSize: 15, color: Colors.white60),
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Row(
+                children: [
+                  Icon(
+                    Icons.place_outlined,
+                    size: 15,
+                    color: Colors.white60,
+                  ),
+                  SizedBox(
+                    width: 4,
+                  ),
+                  Expanded(
+                    child: Text(
+                      reservationEntity.rooms,
+                      style: GoogleFonts.rubik(
+                          fontSize: 15, color: Colors.white60),
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Row(
+                children: [
+                  Icon(
+                    Icons.person_outlined,
+                    size: 15,
+                    color: Colors.white60,
+                  ),
+                  SizedBox(
+                    width: 4,
+                  ),
+                  Expanded(
+                    child: Text(
+                      reservationEntity.teachers,
+                      style: GoogleFonts.rubik(
+                          fontSize: 15, color: Colors.white60),
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Row(
+                children: [
+                  Icon(
+                    Icons.groups_outlined,
+                    size: 15,
+                    color: Colors.white60,
+                  ),
+                  SizedBox(
+                    width: 4,
+                  ),
+                  Expanded(
+                    child: Text(
+                      reservationEntity.groups,
+                      style: GoogleFonts.rubik(
+                          fontSize: 15, color: Colors.white60),
+                    ),
+                  )
+                ],
               ),
             ],
           ),
