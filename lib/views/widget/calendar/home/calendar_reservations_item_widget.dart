@@ -135,6 +135,7 @@ class CalendarReservationsItemWidget extends StatelessWidget {
             children: [
               Text(
                 reservationEntity.name,
+                textAlign: TextAlign.center,
                 style: GoogleFonts.rubik(fontSize: 18),
               ),
               Text(
