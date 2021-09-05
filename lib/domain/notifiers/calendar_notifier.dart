@@ -117,4 +117,14 @@ class CalendarNotifier extends ChangeNotifier {
     this.notifyListeners();
     this.fetch();
   }
+
+  void prevDay() {
+    this._currentDate = this.currentDate.subtract(Duration(days: 1));
+    this.notifyListeners();
+  }
+
+  void nextDay() {
+    this._currentDate = this.currentDate.add(Duration(days: 1));
+    this.notifyListeners();
+  }
 }
