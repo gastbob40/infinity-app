@@ -87,21 +87,25 @@ class CalendarReservationsItemWidget extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8, right: 4),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.person_outlined,
-                            size: 11,
-                            color: Colors.white60,
-                          ),
-                          Text(
-                            reservationEntity.teachers,
-                            style: GoogleFonts.rubik(
-                                fontSize: 11, color: Colors.white60),
-                          )
-                        ],
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8, right: 4),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.person_outlined,
+                              size: 11,
+                              color: Colors.white60,
+                            ),
+                            Expanded(
+                              child: Text(
+                                reservationEntity.teachers,
+                                style: GoogleFonts.rubik(
+                                    fontSize: 11, color: Colors.white60),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     )
                   ],
