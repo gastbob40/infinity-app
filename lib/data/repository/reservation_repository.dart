@@ -7,6 +7,8 @@ import 'package:infinity/domain/entities/selection_entity.dart';
 
 class ReservationRepository {
   static const String zeusGroupUrl = 'https://zeus.infinity.study/api/groups/';
+  static const String zeusTeacherUrl =
+      'https://zeus.infinity.study/api/teachers/';
 
   Future<List<ReservationModel>> _getGroupReservations(
       SelectionEntity selectionEntity) async {
@@ -27,10 +29,34 @@ class ReservationRepository {
     return [];
   }
 
+  Future<List<ReservationModel>> _getTeacherReservations(
+      SelectionEntity selectionEntity) async {
+    try {
+      final response = await Dio().get(zeusTeacherUrl +
+          (selectionEntity.teacherEntity?.id ?? "").toString() +
+          '/reservations');
+
+      if (response.statusCode == 200) {
+        final data = List<Map<String, dynamic>>.from(response.data);
+        List<ReservationModel> reservations =
+            data.map((e) => ReservationModel.fromMap(e)).toList();
+        return reservations;
+      }
+      return [];
+    } on DioError catch (err) {} on SocketException catch (err) {} on Exception catch (e) {}
+
+    return [];
+  }
+
   Future<List<DayReservationsEntity>> getReservation(
       SelectionEntity selectionEntity) async {
-    List<ReservationModel> reservations =
-        await this._getGroupReservations(selectionEntity);
+    List<ReservationModel> reservations = [];
+
+    if (selectionEntity.type == SelectionType.GROUP) {
+      reservations = await this._getGroupReservations(selectionEntity);
+    } else if (selectionEntity.type == SelectionType.TEACHER) {
+      reservations = await this._getTeacherReservations(selectionEntity);
+    }
 
     List<DayReservationsEntity> daysReservations = [];
 
