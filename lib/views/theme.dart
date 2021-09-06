@@ -14,5 +14,8 @@ extension CustomTheme on ColorScheme {
       brightness == Brightness.light ? Color(0xFF000000) : Color(0xFFDEDEDE);
 
   Color get secondaryFontColor =>
-      brightness == Brightness.light ? Color(0xFF000000) : Color(0x8A9C9C9C);
+      brightness == Brightness.light ? Color(0xFF000000) : Color(0xFFACACAC);
+
+  Color get lessonFontColor =>
+      brightness == Brightness.light ? Color(0xFF595959) : Color(0xFFA0A0A0);
 }

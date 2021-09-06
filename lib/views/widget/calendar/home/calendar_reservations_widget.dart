@@ -6,9 +6,6 @@ import 'package:infinity/domain/notifiers/calendar_notifier.dart';
 import 'package:infinity/views/widget/calendar/home/calendar_reservations_item_widget.dart';
 import 'package:provider/provider.dart';
 
-const Color blockColor = Color(0xFF252525);
-const Color separator = Color(0x1FFFFFFF);
-
 class CalendarReservationsWidget extends StatelessWidget {
   final PageController pageController = PageController(initialPage: 1);
   int currentPage = 1;

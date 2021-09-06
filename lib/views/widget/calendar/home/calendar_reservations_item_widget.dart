@@ -45,11 +45,17 @@ class CalendarReservationsItemWidget extends StatelessWidget {
                   children: [
                     Text(
                       reservationEntity.getFormattedStart(),
-                      style: GoogleFonts.rubik(fontWeight: FontWeight.w100),
+                      style: GoogleFonts.rubik(
+                        fontWeight: FontWeight.w100,
+                        color: Theme.of(context).colorScheme.secondaryFontColor,
+                      ),
                     ),
                     Text(
                       reservationEntity.getFormattedEnd(),
-                      style: GoogleFonts.rubik(fontWeight: FontWeight.w100),
+                      style: GoogleFonts.rubik(
+                        fontWeight: FontWeight.w100,
+                        color: Theme.of(context).colorScheme.secondaryFontColor,
+                      ),
                     )
                   ],
                 ),
@@ -61,7 +67,12 @@ class CalendarReservationsItemWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(reservationEntity.name, style: GoogleFonts.rubik()),
+                    Text(
+                      reservationEntity.name,
+                      style: GoogleFonts.rubik(
+                        color: Theme.of(context).colorScheme.primaryFontColor,
+                      ),
+                    ),
                     SizedBox(
                       height: 10,
                     ),
@@ -76,14 +87,20 @@ class CalendarReservationsItemWidget extends StatelessWidget {
                                 child: Icon(
                                   Icons.place_outlined,
                                   size: 11,
-                                  color: Colors.white60,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .lessonFontColor,
                                 ),
                               ),
                               Expanded(
                                 child: Text(
                                   reservationEntity.rooms,
                                   style: GoogleFonts.rubik(
-                                      fontSize: 11, color: Colors.white60),
+                                    fontSize: 11,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .lessonFontColor,
+                                  ),
                                 ),
                               )
                             ],
@@ -97,13 +114,19 @@ class CalendarReservationsItemWidget extends StatelessWidget {
                                 Icon(
                                   Icons.person_outlined,
                                   size: 11,
-                                  color: Colors.white60,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .lessonFontColor,
                                 ),
                                 Expanded(
                                   child: Text(
                                     reservationEntity.teachers,
                                     style: GoogleFonts.rubik(
-                                        fontSize: 11, color: Colors.white60),
+                                      fontSize: 11,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .lessonFontColor,
+                                    ),
                                   ),
                                 )
                               ],
@@ -144,7 +167,7 @@ class CalendarReservationsItemWidget extends StatelessWidget {
                 reservationEntity.type,
                 style: GoogleFonts.rubik(
                   fontSize: 13,
-                  color: Colors.white60,
+                  color: Theme.of(context).colorScheme.lessonFontColor,
                 ),
               ),
               SizedBox(
@@ -155,7 +178,7 @@ class CalendarReservationsItemWidget extends StatelessWidget {
                   Icon(
                     Icons.schedule_outlined,
                     size: 15,
-                    color: Colors.white60,
+                    color: Theme.of(context).colorScheme.lessonFontColor,
                   ),
                   SizedBox(
                     width: 4,
@@ -166,7 +189,9 @@ class CalendarReservationsItemWidget extends StatelessWidget {
                           ' to ' +
                           reservationEntity.getFormattedEnd(),
                       style: GoogleFonts.rubik(
-                          fontSize: 15, color: Colors.white60),
+                        fontSize: 15,
+                        color: Theme.of(context).colorScheme.lessonFontColor,
+                      ),
                     ),
                   )
                 ],
@@ -179,7 +204,7 @@ class CalendarReservationsItemWidget extends StatelessWidget {
                   Icon(
                     Icons.place_outlined,
                     size: 15,
-                    color: Colors.white60,
+                    color: Theme.of(context).colorScheme.lessonFontColor,
                   ),
                   SizedBox(
                     width: 4,
@@ -188,7 +213,9 @@ class CalendarReservationsItemWidget extends StatelessWidget {
                     child: Text(
                       reservationEntity.rooms,
                       style: GoogleFonts.rubik(
-                          fontSize: 15, color: Colors.white60),
+                        fontSize: 15,
+                        color: Theme.of(context).colorScheme.lessonFontColor,
+                      ),
                     ),
                   )
                 ],
@@ -201,7 +228,7 @@ class CalendarReservationsItemWidget extends StatelessWidget {
                   Icon(
                     Icons.person_outlined,
                     size: 15,
-                    color: Colors.white60,
+                    color: Theme.of(context).colorScheme.lessonFontColor,
                   ),
                   SizedBox(
                     width: 4,
@@ -210,7 +237,9 @@ class CalendarReservationsItemWidget extends StatelessWidget {
                     child: Text(
                       reservationEntity.teachers,
                       style: GoogleFonts.rubik(
-                          fontSize: 15, color: Colors.white60),
+                        fontSize: 15,
+                        color: Theme.of(context).colorScheme.lessonFontColor,
+                      ),
                     ),
                   )
                 ],
@@ -223,7 +252,7 @@ class CalendarReservationsItemWidget extends StatelessWidget {
                   Icon(
                     Icons.groups_outlined,
                     size: 15,
-                    color: Colors.white60,
+                    color: Theme.of(context).colorScheme.lessonFontColor,
                   ),
                   SizedBox(
                     width: 4,
@@ -232,7 +261,9 @@ class CalendarReservationsItemWidget extends StatelessWidget {
                     child: Text(
                       reservationEntity.groups,
                       style: GoogleFonts.rubik(
-                          fontSize: 15, color: Colors.white60),
+                        fontSize: 15,
+                        color: Theme.of(context).colorScheme.lessonFontColor,
+                      ),
                     ),
                   )
                 ],
