@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:infinity/domain/notifiers/calendar_notifier.dart';
+import 'package:infinity/views/theme.dart';
 import 'package:provider/provider.dart';
 
 const Color blockColor = Color(0xFF252525);
@@ -18,7 +19,7 @@ class WeekPicker extends StatelessWidget {
     return Container(
         height: 78,
         decoration: BoxDecoration(
-          color: blockColor,
+          color: Theme.of(context).colorScheme.blockBackgroundColor,
           borderRadius: BorderRadius.circular(8),
           boxShadow: [
             BoxShadow(

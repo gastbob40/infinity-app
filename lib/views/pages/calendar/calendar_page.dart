@@ -4,9 +4,6 @@ import 'package:infinity/views/widget/calendar/home/calendar_header_widget.dart'
 import 'package:infinity/views/widget/calendar/home/calendar_reservations_widget.dart';
 import 'package:infinity/views/widget/calendar/home/week_picker.dart';
 
-const Color blockColor = Color(0xFF252525);
-const Color separator = Color(0x1FFFFFFF);
-
 class CalendarPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:infinity/domain/entities/reservation_entity.dart';
-
-const Color blockColor = Color(0xFF252525);
-const Color separator = Color(0x1FFFFFFF);
+import 'package:infinity/views/theme.dart';
 
 class CalendarReservationsItemWidget extends StatelessWidget {
   ReservationEntity reservationEntity;
@@ -18,7 +16,7 @@ class CalendarReservationsItemWidget extends StatelessWidget {
       behavior: HitTestBehavior.translucent,
       child: Container(
         decoration: BoxDecoration(
-          color: blockColor,
+          color: Theme.of(context).colorScheme.blockBackgroundColor,
           borderRadius: BorderRadius.circular(8),
           boxShadow: [
             BoxShadow(
@@ -36,7 +34,10 @@ class CalendarReservationsItemWidget extends StatelessWidget {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  border: Border(right: BorderSide(width: 1, color: separator)),
+                  border: Border(
+                      right: BorderSide(
+                          width: 1,
+                          color: Theme.of(context).colorScheme.separatorColor)),
                 ),
                 padding: EdgeInsets.fromLTRB(0, 0, 16, 0),
                 child: Column(

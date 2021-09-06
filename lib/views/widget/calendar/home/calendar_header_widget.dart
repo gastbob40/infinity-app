@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:infinity/domain/notifiers/calendar_notifier.dart';
 import 'package:infinity/views/pages/calendar/search_page.dart';
+import 'package:infinity/views/theme.dart';
 import 'package:provider/provider.dart';
 
 class CalendarHeaderWidget extends StatelessWidget {
@@ -21,15 +22,17 @@ class CalendarHeaderWidget extends StatelessWidget {
               calendarNotifier.currentYear.toString(),
               style: GoogleFonts.rubik(
                 fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.primaryFontColor,
                 fontSize: 40,
               ),
             ),
             Text(
               calendarNotifier.currentMonth,
               style: GoogleFonts.rubik(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w100,
-                  color: Colors.white60),
+                fontSize: 30,
+                fontWeight: FontWeight.w100,
+                color: Theme.of(context).colorScheme.secondaryFontColor,
+              ),
             )
           ],
         ),
@@ -40,9 +43,10 @@ class CalendarHeaderWidget extends StatelessWidget {
                 onPressed: () => selectDate(context, calendarNotifier),
                 icon: Icon(
                   Icons.event_outlined,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.primaryFontColor,
                 )),
             PopupMenuButton<String>(
+              color: Theme.of(context).colorScheme.primaryFontColor,
               onSelected: (value) =>
                   popupAction(context, value, calendarNotifier),
               itemBuilder: (BuildContext context) {
