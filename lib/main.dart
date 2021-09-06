@@ -8,8 +8,8 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  Intl.defaultLocale = 'fr_FR';
-  initializeDateFormatting('fr_FR', '');
+  Intl.defaultLocale = 'en_US';
+  initializeDateFormatting('en_US', '');
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider<CalendarNotifier>(create: (_) {
       CalendarNotifier calendar = CalendarNotifier();
