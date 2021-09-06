@@ -16,7 +16,7 @@ class WeekPicker extends StatelessWidget {
     CalendarNotifier calendarNotifier = Provider.of(context);
 
     return Container(
-        height: 72,
+        height: 78,
         decoration: BoxDecoration(
           color: blockColor,
           borderRadius: BorderRadius.circular(8),
@@ -86,6 +86,23 @@ class WeekPicker extends StatelessWidget {
                                       ),
                                     ),
                                   ),
+                                  SizedBox(
+                                    height: 4,
+                                  ),
+                                  Container(
+                                    width: 4,
+                                    height: 4,
+                                    decoration: new BoxDecoration(
+                                      color: calendarNotifier.hasDayReservation(
+                                              date
+                                                  .add(Duration(days: i + 1))
+                                                  .subtract(Duration(
+                                                      days: date.weekday)))
+                                          ? Theme.of(context).accentColor
+                                          : Colors.transparent,
+                                      shape: BoxShape.circle,
+                                    ),
+                                  )
                                 ],
                               ),
                             ))

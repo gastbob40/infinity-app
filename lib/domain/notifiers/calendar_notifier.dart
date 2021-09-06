@@ -71,6 +71,17 @@ class CalendarNotifier extends ChangeNotifier {
     return [];
   }
 
+  bool hasDayReservation(DateTime date) {
+    for (int i = 0; i < daysReservations.length; i++) {
+      DayReservationsEntity element = daysReservations[i];
+      if (element.year == date.year &&
+          element.month == date.month &&
+          element.day == date.day) return true;
+    }
+
+    return false;
+  }
+
   void setDate(DateTime dateTime) {
     this._currentDate = dateTime;
     this.notifyListeners();
