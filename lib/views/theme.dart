@@ -7,6 +7,9 @@ extension CustomTheme on ColorScheme {
   Color get separatorColor =>
       brightness == Brightness.light ? Color(0x1F000000) : Color(0x1FFFFFFF);
 
+  Color get selectionDateColor =>
+      brightness == Brightness.light ? Color(0x0D000000) : Color(0x33FFFFFF);
+
   Color get primaryFontColor =>
       brightness == Brightness.light ? Color(0xFF000000) : Color(0xFFDEDEDE);
 

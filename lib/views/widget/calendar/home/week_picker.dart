@@ -65,7 +65,11 @@ class WeekPicker extends StatelessWidget {
                                 children: [
                                   Text(
                                     days[i],
-                                    style: GoogleFonts.rubik(),
+                                    style: GoogleFonts.rubik(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primaryFontColor,
+                                    ),
                                   ),
                                   SizedBox(
                                     height: 8,
@@ -73,8 +77,10 @@ class WeekPicker extends StatelessWidget {
                                   Container(
                                     decoration: BoxDecoration(
                                       color:
-                                          i == calendarNotifier.currentWeekDay
-                                              ? Colors.white10
+                                      i == calendarNotifier.currentWeekDay
+                                              ? Theme.of(context)
+                                                  .colorScheme
+                                                  .selectionDateColor
                                               : Colors.transparent,
                                       borderRadius: BorderRadius.circular(25),
                                     ),
@@ -83,7 +89,9 @@ class WeekPicker extends StatelessWidget {
                                       e.toString(),
                                       style: GoogleFonts.rubik(
                                         fontSize: 11,
-                                        color: Colors.white60,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondaryFontColor,
                                       ),
                                     ),
                                   ),

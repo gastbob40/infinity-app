@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       light: ThemeData(
           brightness: Brightness.light,
           primarySwatch: Colors.blue,
-          accentColor: Colors.amber,
+          accentColor: Colors.blue,
           backgroundColor: Color(0xFFF6F6F6)),
       dark: ThemeData(
           brightness: Brightness.dark,
