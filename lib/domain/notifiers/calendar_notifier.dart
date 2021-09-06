@@ -99,6 +99,7 @@ class CalendarNotifier extends ChangeNotifier {
 
   void fetch() async {
     this._loading = true;
+    this.notifyListeners();
     this.selection = await _selectionRepository.getSelection();
     this.daysReservations =
         await _reservationRepository.getReservation(selection);

@@ -43,9 +43,10 @@ class CalendarHeaderWidget extends StatelessWidget {
                   color: Colors.white,
                 )),
             PopupMenuButton<String>(
-              onSelected: (value) => popupAction(context, value),
+              onSelected: (value) =>
+                  popupAction(context, value, calendarNotifier),
               itemBuilder: (BuildContext context) {
-                return {'Groups', 'Settings'}.map((String choice) {
+                return {'Groups', 'Refresh'}.map((String choice) {
                   return PopupMenuItem<String>(
                     value: choice,
                     child: Text(choice),
@@ -71,12 +72,15 @@ class CalendarHeaderWidget extends StatelessWidget {
       calendarNotifier.setDate(selected);
   }
 
-  popupAction(BuildContext context, String value) {
+  popupAction(
+      BuildContext context, String value, CalendarNotifier calendarNotifier) {
     if (value == 'Groups') {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => SearchPage()),
       );
+    } else if (value == 'Refresh') {
+      calendarNotifier.fetch();
     }
   }
 }
