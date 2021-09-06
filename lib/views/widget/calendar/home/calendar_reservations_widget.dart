@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:infinity/domain/entities/reservation_entity.dart';
 import 'package:infinity/domain/entities/selection_entity.dart';
 import 'package:infinity/domain/notifiers/calendar_notifier.dart';
 import 'package:infinity/views/widget/calendar/home/calendar_reservations_item_widget.dart';
@@ -48,40 +49,39 @@ class CalendarReservationsWidget extends StatelessWidget {
           return true;
         },
         child: PageView.builder(
-            physics: ClampingScrollPhysics(),
-            onPageChanged: (index) async {
-              this.currentPage = index;
-            },
-            itemCount: 3,
-            controller: pageController,
-            itemBuilder: (context, index) {
-              var date = calendarNotifier.currentDate;
-              if (index == 0)
-                date = date.subtract(Duration(days: 1));
-              else if (index == 2) date = date.add(Duration(days: 1));
+          physics: ClampingScrollPhysics(),
+          onPageChanged: (index) async {
+            this.currentPage = index;
+          },
+          itemCount: 3,
+          controller: pageController,
+          itemBuilder: (context, index) {
+            var date = calendarNotifier.currentDate;
+            if (index == 0)
+              date = date.subtract(Duration(days: 1));
+            else if (index == 2) date = date.add(Duration(days: 1));
 
-              return Padding(
-                padding: EdgeInsets.symmetric(horizontal: 4),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: calendarNotifier
-                        .getDayReservation(date)
-                        .map((e) => CalendarReservationsItemWidget(e))
-                        .toList(),
-                  ),
-                ),
+            List<ReservationEntity> reservations =
+                calendarNotifier.getDayReservation(date);
+
+            if (reservations.length == 0) {
+              return Text(
+                'No course for this day',
+                textAlign: TextAlign.center,
               );
-            }),
-      ),
-    );
+            }
 
-    return Expanded(
-      child: SingleChildScrollView(
-        child: Column(
-          children: calendarNotifier
-              .getDayReservation(calendarNotifier.currentDate)
-              .map((e) => CalendarReservationsItemWidget(e))
-              .toList(),
+            return Padding(
+              padding: EdgeInsets.symmetric(horizontal: 4),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: reservations
+                      .map((e) => CalendarReservationsItemWidget(e))
+                      .toList(),
+                ),
+              ),
+            );
+          },
         ),
       ),
     );
