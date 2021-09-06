@@ -46,7 +46,6 @@ class CalendarHeaderWidget extends StatelessWidget {
                   color: Theme.of(context).colorScheme.primaryFontColor,
                 )),
             PopupMenuButton<String>(
-              color: Theme.of(context).colorScheme.primaryFontColor,
               onSelected: (value) =>
                   popupAction(context, value, calendarNotifier),
               itemBuilder: (BuildContext context) {
