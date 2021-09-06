@@ -73,6 +73,7 @@ class _GroupSelectWidgetState extends State<GroupSelectWidget> {
                   ),
                   itemBuilder: (context, index) {
                     return GestureDetector(
+                      behavior: HitTestBehavior.translucent,
                       onTap: () =>
                           calendarNotifier.setGroup(displayGroups[index]),
                       child: Row(
@@ -87,16 +88,16 @@ class _GroupSelectWidgetState extends State<GroupSelectWidget> {
                           Radio(
                             value: displayGroups[index].id,
                             groupValue: calendarNotifier.selection.type ==
-                                    SelectionType.GROUP
+                                SelectionType.GROUP
                                 ? calendarNotifier.selection.groupEntity?.id
                                 : -1,
                             onChanged: (i) =>
                                 calendarNotifier.setGroup(displayGroups[index]),
                             activeColor: Theme.of(context).accentColor,
                             materialTapTargetSize:
-                                MaterialTapTargetSize.shrinkWrap,
+                            MaterialTapTargetSize.shrinkWrap,
                             fillColor: MaterialStateColor.resolveWith(
-                                (states) => Theme.of(context).accentColor),
+                                    (states) => Theme.of(context).accentColor),
                           )
                         ],
                       ),

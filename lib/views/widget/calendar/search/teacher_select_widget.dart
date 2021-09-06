@@ -73,6 +73,7 @@ class _TeacherSelectWidgetState extends State<TeacherSelectWidget> {
                   ),
                   itemBuilder: (context, index) {
                     return GestureDetector(
+                      behavior: HitTestBehavior.translucent,
                       onTap: () =>
                           calendarNotifier.setTeacher(displayTeachers[index]),
                       child: Row(
@@ -87,16 +88,16 @@ class _TeacherSelectWidgetState extends State<TeacherSelectWidget> {
                           Radio(
                             value: displayTeachers[index].id,
                             groupValue: calendarNotifier.selection.type ==
-                                    SelectionType.TEACHER
+                                SelectionType.TEACHER
                                 ? calendarNotifier.selection.teacherEntity?.id
                                 : -1,
                             onChanged: (i) => calendarNotifier
                                 .setTeacher(displayTeachers[index]),
                             activeColor: Theme.of(context).accentColor,
                             materialTapTargetSize:
-                                MaterialTapTargetSize.shrinkWrap,
+                            MaterialTapTargetSize.shrinkWrap,
                             fillColor: MaterialStateColor.resolveWith(
-                                (states) => Theme.of(context).accentColor),
+                                    (states) => Theme.of(context).accentColor),
                           )
                         ],
                       ),
